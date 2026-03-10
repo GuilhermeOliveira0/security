@@ -1,11 +1,16 @@
 <?php
-include( 'criptografia.php' );
+include( 'aes.php' );
 
 $usuario = $_POST['usuario'];
 $senha = $_POST['senha'];
 
-$usuario_cripto = cifrar( $usuario );
-$senha_cripto = cifrar( $senha );
+$chave = "1234567890123456";
+
+$aesUsuario = new AES($usuario, $chave, 128);
+$usuario_cripto = $aesUsuario->encrypt();
+
+$aesSenha = new AES($senha, $chave, 128);
+$senha_cripto = $aesSenha->encrypt();
 
 #http://localhost/seguranca/validarlogin_cripto.php
 
